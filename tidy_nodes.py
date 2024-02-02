@@ -16,8 +16,8 @@ Description:
 
 Menus:
 
-    Right-click selected items in the Action schematic --> Edit... --> Tidy Nodes
-    Right-click selected nodes in the Batch schematic --> Edit... --> Tidy Nodes
+    Right-click selected items in the Action schematic --> Tidy Nodes...
+    Right-click selected nodes in the Batch schematic --> Tidy Nodes...
 
 To Install:
 
