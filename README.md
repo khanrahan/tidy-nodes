@@ -14,21 +14,20 @@ To make available to all users on the workstation, copy `align_nodes.py` to `/op
 For specific users, copy to `/opt/Autodesk/user/<user name>/python`
 
 ## Menus
-- Right-click selected nodes in the Action schematic `->` Tidy Nodes... `->` Align Horizontally
-- Right-click selected nodes in the Action schematic `->` Tidy Nodes... `->` Align Vertically
-- Right-click selected nodes in the Action schematic `->` Tidy Nodes... `->` Distribute Horizontally
-- Right-click selected nodes in the Action schematic `->` Tidy Nodes... `->` Distribute Vertically
-- Right-click selected nodes in the Action schematic `->` Tidy Nodes... `->` Scale
-- Right-click selected nodes in the Action schematic `->` Tidy Nodes... `->` Tidy Horizontally
-- Right-click selected nodes in the Action schematic `->` Tidy Nodes... `->` Tidy Vertically
-
-- Right-click selected nodes in the Batch schematic `->` Tidy Nodes... `->` Align Horizontally
-- Right-click selected nodes in the Batch schematic `->` Tidy Nodes... `->` Align Vertically
-- Right-click selected nodes in the Batch schematic `->` Tidy Nodes... `->` Distribute Horizontally
-- Right-click selected nodes in the Batch schematic `->` Tidy Nodes... `->` Distribute Vertically
-- Right-click selected nodes in the Batch schematic `->` Tidy Nodes... `->` Scale
-- Right-click selected nodes in the Batch schematic `->` Tidy Nodes... `->` Tidy Horizontally
-- Right-click selected nodes in the Batch schematic `->` Tidy Nodes... `->` Tidy Vertically
+- Right-click selected nodes in the Action schematic `->` Tidy Nodes... `->`
+  - Align Vertically
+  - Distribute Horizontally
+  - Distribute Vertically
+  - Scale
+  - Tidy Horizontally
+  - Tidy Vertically
+- Right-click selected nodes in the Batch schematic `->` Tidy Nodes... `->`
+  - Align Vertically
+  - Distribute Horizontally
+  - Distribute Vertically
+  - Scale
+  - Tidy Horizontally
+  - Tidy Vertically
 
 ## Acknowledgements
 UI Templates courtesy of [pyflame.com](http://www.pyflame.com)
