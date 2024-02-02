@@ -4,6 +4,8 @@ Plugin for [Autodesk Flame software](http://www.autodesk.com/products/flame).
 
 Align, distribute, or both (aka tidy) nodes in the Batch or Action schematic.
 
+![screen capture demonstration](tidy_nodes_demo.gif)
+
 ## Installation
 **Tested & working on 2021.1 & 2024.1.2**
 
