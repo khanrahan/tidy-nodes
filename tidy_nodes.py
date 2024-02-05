@@ -2,13 +2,13 @@
 Script Name: Tidy Nodes
 Written By: Kieran Hanrahan
 
-Script Version: 1.0.0
+Script Version: 1.0.1
 Flame Version: 2021.1
 
 URL: http://github.com/khanrahan/tidy-nodes
 
 Creation Date: 02.01.24
-Update Date: 02.01.24
+Update Date: 02.05.24
 
 Description:
 
@@ -35,7 +35,7 @@ from PySide2 import QtGui
 from PySide2 import QtWidgets
 
 TITLE = 'Tidy Nodes'
-VERSION_INFO = (1, 0, 0)
+VERSION_INFO = (1, 0, 1)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
 TITLE_VERSION = '{} v{}'.format(TITLE, VERSION)
 MESSAGE_PREFIX = '[PYTHON]'
@@ -657,6 +657,18 @@ class TidyNodes(object):
     Tidy selected nodes in the Action or Batch schematic.
 
     Use to scale or evenly distribute nodes.
+
+    NOTE - Flame node position values are integer.  Beware floats!
+
+    Attributes:
+        selection (list):
+            Selected node objects from Flame.
+        starting_positions (list):
+            Integer x, y starting positions of node objects in selection.
+        boundaries (dict):
+            Integer max and min values for x & y axis of selection node objects.
+        center (tuple):
+            Integer x, y center point of the selected node objects.
     '''
 
     def __init__(self, selection):
@@ -682,15 +694,15 @@ class TidyNodes(object):
         print(' '.join([MESSAGE_PREFIX, string]))
 
     def get_starting_positions(self):
-        '''Store a list of tuples, that contains the postion in x, and
-        the position in y for each of the nodes in self.selection.'''
+        '''Store a list of tuples, that contains the integer x, y postion for each node
+        in self.selection.'''
 
         for node in self.selection:
             self.starting_positions.append((node.pos_x.get_value(),
                                             node.pos_y.get_value()))
 
     def get_boundaries(self):
-        '''Store the maximum & minimum values for X & Y of selected nodes.'''
+        '''Store the maximum & minimum values for x, y of selected nodes.'''
 
         sort_x = sorted(self.starting_positions, key=lambda x: x[0])
         sort_y = sorted(self.starting_positions, key=lambda y: y[1])
@@ -699,8 +711,8 @@ class TidyNodes(object):
                            'y_max': sort_y[0][1], 'y_min': sort_y[-1][1]}
 
     def get_center(self):
-        '''Store a tuple that contains the center point for the selected nodes in X & Y
-        coordinates.'''
+        '''Store a tuple that contains the integer x, y center point for the selected
+        nodes.'''
 
         x_center = (self.boundaries['x_max'] + self.boundaries['x_min']) / 2
         y_center = (self.boundaries['y_max'] + self.boundaries['y_min']) / 2
