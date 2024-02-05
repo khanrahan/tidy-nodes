@@ -722,20 +722,22 @@ class TidyNodes(object):
     def distribute(self, x_axis=True, y_axis=True):
         '''Evenly distribute the nodes between the 2 boundary nodes.'''
 
-        spacing_x = round((self.boundaries['x_max'] - self.boundaries['x_min']) /
-                          (len(self.selection) - 1))
-        spacing_y = round((self.boundaries['y_max'] - self.boundaries['y_min']) /
-                          (len(self.selection) - 1))
+        spacing_x = int(abs(round(
+                (self.boundaries['x_max'] - self.boundaries['x_min']) /
+                (len(self.selection) - 1))))
+        spacing_y = int(abs(round(
+                (self.boundaries['y_max'] - self.boundaries['y_min']) /
+                (len(self.selection) - 1))))
 
         nodes_sorted_x = sorted(zip(self.selection, self.starting_positions),
                                 key=lambda node: node[1][0])
         nodes_sorted_y = sorted(zip(self.selection, self.starting_positions),
                                 key=lambda node: node[1][1])
 
-        dest_x = [nodes_sorted_x[0][1][0] + abs(spacing_x) * x
-                  for x in range(len(self.selection))]
-        dest_y = [nodes_sorted_y[0][1][1] + abs(spacing_y) * x
-                  for x in range(len(self.selection))]
+        dest_x = [nodes_sorted_x[0][1][0] + spacing_x * num
+                  for num in range(len(self.selection))]
+        dest_y = [nodes_sorted_y[0][1][1] + spacing_y * num
+                  for num in range(len(self.selection))]
 
         # skip first and last.  these should not move.  only the interior nodes move.
         for index in list(range(len(self.selection)))[1:-1]:
@@ -756,10 +758,10 @@ class TidyNodes(object):
         selection.'''
 
         for node, start_pos in zip(self.selection, self.starting_positions):
-            destination_x = round(
-                    (start_pos[0] - self.center[0]) * scale_x + self.center[0])
-            destination_y = round(
-                    (start_pos[1] - self.center[1]) * scale_y + self.center[1])
+            destination_x = int(round(
+                    (start_pos[0] - self.center[0]) * scale_x + self.center[0]))
+            destination_y = int(round(
+                    (start_pos[1] - self.center[1]) * scale_y + self.center[1]))
 
             # the 2 below are not added to the undo stack
             node.pos_x.set_value(destination_x)
