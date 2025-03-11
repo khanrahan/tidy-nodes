@@ -2,7 +2,7 @@
 Script Name: Tidy Nodes
 Written By: Kieran Hanrahan
 
-Script Version: 1.0.1
+Script Version: 2.0.0
 Flame Version: 2025
 
 URL: http://github.com/khanrahan/tidy-nodes
@@ -32,7 +32,7 @@ import flame
 from PySide6 import QtCore, QtGui, QtWidgets
 
 TITLE = 'Tidy Nodes'
-VERSION_INFO = (1, 0, 1)
+VERSION_INFO = (2, 0, 0)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
 TITLE_VERSION = f'{TITLE} v{VERSION}'
 MESSAGE_PREFIX = '[PYTHON]'
