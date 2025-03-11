@@ -252,7 +252,7 @@ class FlameSlider(QtWidgets.QLineEdit):
 
         def button_press(key):
 
-            if self.clean_line == True:
+            if self.clean_line:
                 calc_lineedit.setText('')
 
             calc_lineedit.insert(key)
@@ -290,7 +290,7 @@ class FlameSlider(QtWidgets.QLineEdit):
 
         def enter():
 
-            if self.clean_line == True:
+            if self.clean_line:
                 return calc_window.close()
 
             if calc_lineedit.text():
