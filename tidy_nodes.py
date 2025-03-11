@@ -8,7 +8,7 @@ Flame Version: 2025
 URL: http://github.com/khanrahan/tidy-nodes
 
 Creation Date: 02.01.24
-Update Date: 02.05.24
+Update Date: 03.11.25
 
 Description:
 
