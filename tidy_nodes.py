@@ -914,20 +914,24 @@ def tidy_vertical(selection):
 
 def scope_nodes(selection):
     """Test for correct node object types, at least 2 or more.  Returns a bool."""
-    for item in selection:
-        if isinstance(item, (flame.PyCoNode, flame.PyNode)):
-            if len(selection) > 1:  # 2 or more nodes
-                return True
-    return False
+    valid_objects = (
+            flame.PyCoNode,
+            flame.PyNode,
+    )
+
+    if all(isinstance(item, valid_objects) for item in selection):
+        return len(selection) > 1
 
 
 def scope_more_nodes(selection):
     """Test for correct node object types, at least 3 or more.  Returns a bool."""
-    for item in selection:
-        if isinstance(item, (flame.PyCoNode, flame.PyNode)):
-            if len(selection) > 2:  # 3 or more nodes
-                return True
-    return False
+    valid_objects = (
+            flame.PyCoNode,
+            flame.PyNode,
+    )
+
+    if all(isinstance(item, valid_objects) for item in selection):
+        return len(selection) > 2
 
 
 def get_action_custom_ui_actions():
