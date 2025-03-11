@@ -650,12 +650,10 @@ class FlameSlider(QtWidgets.QLineEdit):
 
 
 class TidyNodes:
-    """
-    Tidy selected nodes in the Action or Batch schematic.
+    """Tidy selected nodes in the Action or Batch schematic.
 
-    Use to scale or evenly distribute nodes.
-
-    NOTE - Flame node position values are integer.  Beware floats!
+    Use to scale or evenly distribute nodes.  A tidy operation is combination of align &
+    distribute.  NOTE - Flame node position values are integer.  Beware floats!
 
     Attributes:
         selection (list):
@@ -669,7 +667,7 @@ class TidyNodes:
     """
 
     def __init__(self, selection):
-
+        """Initialize TidyNodes object with starting attributes."""
         self.selection = selection
 
         self.message(TITLE_VERSION)
@@ -690,7 +688,9 @@ class TidyNodes:
         print(' '.join([MESSAGE_PREFIX, string]))
 
     def get_starting_positions(self):
-        """Store a list of tuples, that contains the integer x, y postion for each node
+        """Get starting position of selected nodes.
+
+        Store a list of tuples, that contains the integer x, y postion for each node
         in self.selection.
         """
         for node in self.selection:
@@ -706,7 +706,9 @@ class TidyNodes:
                            'y_max': sort_y[0][1], 'y_min': sort_y[-1][1]}
 
     def get_center(self):
-        """Store a tuple that contains the integer x, y center point for the selected
+        """Get center point of selected nodes.
+
+        Store a tuple that contains the integer x, y center point for the selected
         nodes.
         """
         x_center = (self.boundaries['x_max'] + self.boundaries['x_min']) / 2
@@ -747,7 +749,9 @@ class TidyNodes:
             node.pos_y.set_value(start_pos[1])
 
     def scale(self, scale_x, scale_y):
-        """Scale the distance from the selected nodes based on the center point of the
+        """Scale nodes.
+
+        Scale the distance from the selected nodes based on the center point of the
         selection.
         """
         for node, start_pos in zip(self.selection, self.starting_positions):
@@ -835,7 +839,6 @@ class TidyNodes:
         self.hbox.addWidget(self.ok_btn)
 
         self.vbox = QtWidgets.QVBoxLayout()
-#        self.vbox.setMargin(20)
         self.vbox.setContentsMargins(20, 20, 20, 20)
         self.vbox.addLayout(self.grid)
         self.vbox.insertSpacing(1, 20)
@@ -847,7 +850,8 @@ class TidyNodes:
         resolution = QtGui.QGuiApplication.primaryScreen().availableGeometry()
         self.window_scale.move(
                 (resolution.width() / 2) - (self.window_scale.frameSize().width() / 2),
-                (resolution.height() / 2) - (self.window_scale.frameSize().height() / 2))
+                (resolution.height() / 2) - (self.window_scale.frameSize().height() / 2)
+        )
 
         self.window_scale.show()
         return self.window_scale
