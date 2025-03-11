@@ -364,6 +364,7 @@ class FlameSlider(QtWidgets.QLineEdit):
                                              padding-left: 5px;
                                              font: 14pt "Discreet"}
                                QLineEdit:hover {border: 1px solid rgb(90, 90, 90)}""")
+
         def revert_color():
             self.setStyleSheet("""QLineEdit {color: rgb(154, 154, 154);
                                              background-color: rgb(55, 65, 75);
