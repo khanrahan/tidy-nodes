@@ -651,7 +651,7 @@ class FlameSlider(QtWidgets.QLineEdit):
             self.setText('%.2f' % float(value))
 
 
-class TidyNodes(object):
+class TidyNodes:
     """
     Tidy selected nodes in the Action or Batch schematic.
 
