@@ -36,7 +36,7 @@ from PySide6 import QtCore, QtGui, QtWidgets
 TITLE = 'Tidy Nodes'
 VERSION_INFO = (1, 0, 1)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
-TITLE_VERSION = '{} v{}'.format(TITLE, VERSION)
+TITLE_VERSION = f'{TITLE} v{VERSION}'
 MESSAGE_PREFIX = '[PYTHON]'
 
 
@@ -675,7 +675,7 @@ class TidyNodes(object):
         self.selection = selection
 
         self.message(TITLE_VERSION)
-        self.message('Script called from {}'.format(__file__))
+        self.message(f'Script called from {__file__}')
 
         self.starting_positions = []
         self.get_starting_positions()
