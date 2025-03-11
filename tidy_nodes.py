@@ -424,9 +424,7 @@ class FlameSlider(QtWidgets.QLineEdit):
             pass
 
         class FlameButton(QtWidgets.QPushButton):
-            """
-            Custom Qt Flame Button Widget
-            """
+            """Custom Qt Flame Button Widget"""
 
             def __init__(self, button_name, size_x, size_y, connect, parent, *args, **kwargs):
                 super().__init__(*args, **kwargs)
