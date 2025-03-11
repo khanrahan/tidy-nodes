@@ -3,7 +3,7 @@ Script Name: Tidy Nodes
 Written By: Kieran Hanrahan
 
 Script Version: 1.0.1
-Flame Version: 2021.1
+Flame Version: 2025
 
 URL: http://github.com/khanrahan/tidy-nodes
 
@@ -29,10 +29,9 @@ To Install:
 '''
 
 from __future__ import print_function
+
 import flame
-from PySide2 import QtCore
-from PySide2 import QtGui
-from PySide2 import QtWidgets
+from PySide6 import QtCore, QtGui, QtWidgets
 
 TITLE = 'Tidy Nodes'
 VERSION_INFO = (1, 0, 1)
@@ -415,8 +414,8 @@ class FlameSlider(QtWidgets.QLineEdit):
 
         # Limit characters that can be entered into lineedit
 
-        regex = QtCore.QRegExp('[0-9_,=,/,*,+,\-,.]+')
-        validator = QtGui.QRegExpValidator(regex)
+        regex = QtCore.QRegularExpression('[0-9_,=,/,*,+,\-,.]+')
+        validator = QtGui.QRegularExpressionValidator(regex)
         calc_lineedit.setValidator(validator)
 
         # Buttons
@@ -847,7 +846,8 @@ class TidyNodes(object):
         self.hbox.addWidget(self.ok_btn)
 
         self.vbox = QtWidgets.QVBoxLayout()
-        self.vbox.setMargin(20)
+#        self.vbox.setMargin(20)
+        self.vbox.setContentsMargins(20, 20, 20, 20)
         self.vbox.addLayout(self.grid)
         self.vbox.insertSpacing(1, 20)
         self.vbox.addLayout(self.hbox)
@@ -855,7 +855,7 @@ class TidyNodes(object):
         self.window_scale.setLayout(self.vbox)
 
         # Center Window
-        resolution = QtWidgets.QDesktopWidget().screenGeometry()
+        resolution = QtGui.QGuiApplication.primaryScreen().availableGeometry()
         self.window_scale.move(
                 (resolution.width() / 2) - (self.window_scale.frameSize().width() / 2),
                 (resolution.height() / 2) - (self.window_scale.frameSize().height() / 2))
@@ -991,29 +991,29 @@ def get_batch_custom_ui_actions():
              'actions': [{'name': 'Align Horizontally',
                           'isVisible': scope_nodes,
                           'execute': align_horizontal,
-                          'minimumVersion': '2021.1'},
+                          'minimumVersion': '2025.0.0.0'},
                          {'name': 'Align Vertically',
                           'isVisible': scope_nodes,
                           'execute': align_vertical,
-                          'minimumVersion': '2021.1'},
+                          'minimumVersion': '2025.0.0.0'},
                          {'name': 'Distribute Horizontally',
                           'isVisible': scope_more_nodes,
                           'execute': distribute_horizontal,
-                          'minimumVersion': '2021.1'},
+                          'minimumVersion': '2025.0.0.0'},
                          {'name': 'Distribute Vertically',
                           'isVisible': scope_more_nodes,
                           'execute': distribute_vertical,
-                          'minimemVersion': '2021.1'},
+                          'minimemVersion': '2025.0.0.0'},
                          {'name': 'Scale',
                           'isVisible': scope_nodes,
                           'execute': scale,
-                          'minimumVersion': '2021.1'},
+                          'minimumVersion': '2025.0.0.0'},
                          {'name': 'Tidy Horizontally',
                           'isVisible': scope_nodes,
                           'execute': tidy_horizontal,
-                          'minimemVersion': '2021.1'},
+                          'minimemVersion': '2025.0.0.0'},
                          {'name': 'Tidy Vertically',
                           'isVisible': scope_nodes,
                           'execute': tidy_vertical,
-                          'minimemVersion': '2021.1'}]
+                          'minimemVersion': '2025.0.0.0'}]
             }]
