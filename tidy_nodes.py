@@ -693,7 +693,8 @@ class TidyNodes(object):
 
     def get_starting_positions(self):
         """Store a list of tuples, that contains the integer x, y postion for each node
-        in self.selection."""
+        in self.selection.
+        """
         for node in self.selection:
             self.starting_positions.append((node.pos_x.get_value(),
                                             node.pos_y.get_value()))
@@ -708,7 +709,8 @@ class TidyNodes(object):
 
     def get_center(self):
         """Store a tuple that contains the integer x, y center point for the selected
-        nodes."""
+        nodes.
+        """
         x_center = (self.boundaries['x_max'] + self.boundaries['x_min']) / 2
         y_center = (self.boundaries['y_max'] + self.boundaries['y_min']) / 2
 
@@ -748,7 +750,8 @@ class TidyNodes(object):
 
     def scale(self, scale_x, scale_y):
         """Scale the distance from the selected nodes based on the center point of the
-        selection."""
+        selection.
+        """
         for node, start_pos in zip(self.selection, self.starting_positions):
             destination_x = int(round(
                     (start_pos[0] - self.center[0]) * scale_x + self.center[0]))
