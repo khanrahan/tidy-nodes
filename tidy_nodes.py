@@ -712,6 +712,9 @@ class TidyNodes:
         self.center = None
         self.get_center()
 
+        self.names = None
+        self.get_names()
+
     @staticmethod
     def message(string):
         """Print message to shell window and append global MESSAGE_PREFIX."""
@@ -745,6 +748,18 @@ class TidyNodes:
         y_center = (self.boundaries['y_max'] + self.boundaries['y_min']) / 2
 
         self.center = (x_center, y_center)
+
+    def get_names(self):
+        """Get a string of all selected node names.
+
+        If 2 or more join with oxford comma.
+        """
+        name_list = [node.name.get_value() for node in self.selection]
+
+        if len(self.selection) == 2:
+            self.names = f'{name_list[0]} and {name_list[1]}'
+        if len(self.selection) > 2:
+            self.names = f"{', '.join(name_list[:-1])}, and {name_list[-1]}"
 
     def distribute(self, x_axis=True, y_axis=True):
         """Evenly distribute the nodes between the 2 boundary nodes."""
@@ -891,6 +906,7 @@ def align_horizontal(selection):
     """Scaling to 0 on Y is the same as aligning on the horizontal."""
     nodes = TidyNodes(selection)
     nodes.scale(1, 0)
+    nodes.message(f'Aligning the nodes {nodes.names} horizontally...')
     nodes.message('Done!')
 
 
@@ -898,6 +914,7 @@ def align_vertical(selection):
     """Scaling to 0 on X is the same as aligning on the vertical."""
     nodes = TidyNodes(selection)
     nodes.scale(0, 1)
+    nodes.message(f'Aligning the nodes {nodes.names} vertically...')
     nodes.message('Done!')
 
 
@@ -905,6 +922,7 @@ def distribute(selection):
     """Evenly space the selected nodes on X & Y axis."""
     nodes = TidyNodes(selection)
     nodes.distribute()
+    nodes.message(f'Distributing the nodes {nodes.names} horizontally & vertically...')
     nodes.message('Done!')
 
 
@@ -912,6 +930,7 @@ def distribute_horizontal(selection):
     """Evenly space the selected nodes on the X axis."""
     nodes = TidyNodes(selection)
     nodes.distribute(y_axis=False)
+    nodes.message(f'Distributing the nodes {nodes.names} horizontally...')
     nodes.message('Done!')
 
 
@@ -919,12 +938,14 @@ def distribute_vertical(selection):
     """Evenly space the selected nodes on the Y axis."""
     nodes = TidyNodes(selection)
     nodes.distribute(x_axis=False)
+    nodes.message(f'Distributing the nodes {nodes.names} vertically...')
     nodes.message('Done!')
 
 
 def scale(selection):
     """Launch the the GUI window to interactively scale the selection."""
     nodes = TidyNodes(selection)
+    nodes.message(f'Scaling the nodes {nodes.names}...')
     nodes.scale_window()
 
 
@@ -933,6 +954,7 @@ def tidy_horizontal(selection):
     nodes = TidyNodes(selection)
     nodes.scale(1, 0)
     nodes.distribute(y_axis=False)
+    nodes.message(f'Tidying the nodes {nodes.names} horizontally...')
     nodes.message('Done!')
 
 
@@ -941,6 +963,7 @@ def tidy_vertical(selection):
     nodes = TidyNodes(selection)
     nodes.scale(0, 1)
     nodes.distribute(x_axis=False)
+    nodes.message(f'Tidying the nodes {nodes.names} vertically...')
     nodes.message('Done!')
 
 
