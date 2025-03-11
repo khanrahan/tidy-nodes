@@ -28,8 +28,6 @@ To Install:
     /opt/Autodesk/user/<user name>/python
 """
 
-from __future__ import print_function
-
 import flame
 from PySide6 import QtCore, QtGui, QtWidgets
 
