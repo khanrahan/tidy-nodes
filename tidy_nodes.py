@@ -956,11 +956,11 @@ def get_action_custom_ui_actions():
                           'execute': scale,
                           'minimumVersion': '2021.1'},
                          {'name': 'Tidy Horizontally',
-                          'isVisible': scope_nodes,
+                          'isVisible': scope_more_nodes,
                           'execute': tidy_horizontal,
                           'minimemVersion': '2021.1'},
                          {'name': 'Tidy Vertically',
-                          'isVisible': scope_nodes,
+                          'isVisible': scope_more_nodes,
                           'execute': tidy_vertical,
                           'minimemVersion': '2021.1'}]
             }]
@@ -990,11 +990,11 @@ def get_batch_custom_ui_actions():
                           'execute': scale,
                           'minimumVersion': '2025.0.0.0'},
                          {'name': 'Tidy Horizontally',
-                          'isVisible': scope_nodes,
+                          'isVisible': scope_more_nodes,
                           'execute': tidy_horizontal,
                           'minimemVersion': '2025.0.0.0'},
                          {'name': 'Tidy Vertically',
-                          'isVisible': scope_nodes,
+                          'isVisible': scope_more_nodes,
                           'execute': tidy_vertical,
                           'minimemVersion': '2025.0.0.0'}]
             }]
