@@ -173,7 +173,10 @@ class FlameSlider(QtWidgets.QLineEdit):
         slider = FlameSlider(0, -20, 20, False)
     """
 
-    def __init__(self, start_value, min_value, max_value, value_is_float=False, slider_width=110):
+    def __init__(
+            self, start_value, min_value, max_value,
+            value_is_float=False, slider_width=110
+    ):
 
         super().__init__()
         self.setAlignment(QtCore.Qt.AlignCenter)
@@ -356,24 +359,30 @@ class FlameSlider(QtWidgets.QLineEdit):
 
         def close_calc():
             calc_window.close()
-            self.setStyleSheet("""QLineEdit {color: rgb(154, 154, 154);
-                                             background-color: rgb(55, 65, 75);
-                                             selection-color: rgb(154, 154, 154);
-                                             selection-background-color: rgb(55, 65, 75);
-                                             border: none;
-                                             padding-left: 5px;
-                                             font: 14pt "Discreet"}
-                               QLineEdit:hover {border: 1px solid rgb(90, 90, 90)}""")
+            self.setStyleSheet("""
+                QLineEdit {
+                    color: rgb(154, 154, 154);
+                    background-color: rgb(55, 65, 75);
+                    selection-color: rgb(154, 154, 154);
+                    selection-background-color: rgb(55, 65, 75);
+                    border: none;
+                    padding-left: 5px;
+                    font: 14pt "Discreet"}
+                QLineEdit:hover {
+                    border: 1px solid rgb(90, 90, 90)}""")
 
         def revert_color():
-            self.setStyleSheet("""QLineEdit {color: rgb(154, 154, 154);
-                                             background-color: rgb(55, 65, 75);
-                                             selection-color: rgb(154, 154, 154);
-                                             selection-background-color: rgb(55, 65, 75);
-                                             border: none;
-                                             padding-left: 5px;
-                                             font: 14pt "Discreet"}
-                               QLineEdit:hover {border: 1px solid rgb(90, 90, 90)}""")
+            self.setStyleSheet("""
+                QLineEdit {
+                    color: rgb(154, 154, 154);
+                    background-color: rgb(55, 65, 75);
+                    selection-color: rgb(154, 154, 154);
+                    selection-background-color: rgb(55, 65, 75);
+                    border: none;
+                    padding-left: 5px;
+                    font: 14pt "Discreet"}
+                QLineEdit:hover {
+                    border: 1px solid rgb(90, 90, 90)}""")
         calc_version = '1.2'
         self.clean_line = False
 
@@ -403,13 +412,15 @@ class FlameSlider(QtWidgets.QLineEdit):
         calc_lineedit.setMinimumHeight(28)
         calc_lineedit.setFocus()
         calc_lineedit.returnPressed.connect(enter)
-        calc_lineedit.setStyleSheet("""QLineEdit {color: rgb(154, 154, 154);
-                                                  background-color: rgb(55, 65, 75);
-                                                  selection-color: rgb(38, 38, 38);
-                                                  selection-background-color: rgb(184, 177, 167);
-                                                  border: none;
-                                                  padding-left: 5px;
-                                                  font: 14px "Discreet"}""")
+        calc_lineedit.setStyleSheet("""
+            QLineEdit {
+                color: rgb(154, 154, 154);
+                background-color: rgb(55, 65, 75);
+                selection-color: rgb(38, 38, 38);
+                selection-background-color: rgb(184, 177, 167);
+                border: none;
+                padding-left: 5px;
+                font: 14px "Discreet"}""")
 
         # Limit characters that can be entered into lineedit
 
@@ -426,7 +437,10 @@ class FlameSlider(QtWidgets.QLineEdit):
         class FlameButton(QtWidgets.QPushButton):
             """Custom Qt Flame Button Widget"""
 
-            def __init__(self, button_name, size_x, size_y, connect, parent, *args, **kwargs):
+            def __init__(
+                    self, button_name, size_x, size_y,
+                    connect, parent, *args, **kwargs
+            ):
                 super().__init__(*args, **kwargs)
 
                 self.setText(button_name)
@@ -435,17 +449,22 @@ class FlameSlider(QtWidgets.QLineEdit):
                 self.setMaximumSize(size_x, size_y)
                 self.setFocusPolicy(QtCore.Qt.NoFocus)
                 self.clicked.connect(connect)
-                self.setStyleSheet("""QPushButton {color: rgb(154, 154, 154);
-                                                 background-color: rgb(58, 58, 58);
-                                                 border: none;
-                                                 font: 14px "Discreet"}
-                                   QPushButton:hover {border: 1px solid rgb(90, 90, 90)}
-                                   QPushButton:pressed {color: rgb(159, 159, 159);
-                                                         background-color: rgb(66, 66, 66);
-                                                         border: none}
-                                   QPushButton:disabled {color: rgb(116, 116, 116);
-                                                          background-color: rgb(58, 58, 58);
-                                                          border: none}""")
+                self.setStyleSheet("""
+                    QPushButton {
+                        color: rgb(154, 154, 154);
+                        background-color: rgb(58, 58, 58);
+                        border: none;
+                        font: 14px "Discreet"}
+                    QPushButton:hover {
+                        border: 1px solid rgb(90, 90, 90)}
+                    QPushButton:pressed {
+                        color: rgb(159, 159, 159);
+                        background-color: rgb(66, 66, 66);
+                        border: none}
+                    QPushButton:disabled {
+                        color: rgb(116, 116, 116);
+                        background-color: rgb(58, 58, 58);
+                        border: none}""")
 
         blank_btn = FlameButton('', 40, 28, calc_null, calc_window)
         blank_btn.setDisabled(True)
@@ -545,14 +564,17 @@ class FlameSlider(QtWidgets.QLineEdit):
             self.value_at_press = self.value()
             self.pos_at_press = event.pos()
             self.setCursor(QtGui.QCursor(QtCore.Qt.SizeHorCursor))
-            self.setStyleSheet("""QLineEdit {color: rgb(217, 217, 217);
-                                             background-color: rgb(73, 86, 99);
-                                             selection-color: rgb(154, 154, 154);
-                                             selection-background-color: rgb(73, 86, 99);
-                                             border: none;
-                                             padding-left: 5px;
-                                             font: 14pt "Discreet"}
-                               QLineEdit:hover {border: 1px solid rgb(90, 90, 90)}""")
+            self.setStyleSheet("""
+                QLineEdit {
+                    color: rgb(217, 217, 217);
+                    background-color: rgb(73, 86, 99);
+                    selection-color: rgb(154, 154, 154);
+                    selection-background-color: rgb(73, 86, 99);
+                    border: none;
+                    padding-left: 5px;
+                    font: 14pt "Discreet"}
+                QLineEdit:hover {
+                    border: 1px solid rgb(90, 90, 90)}""")
 
     def mouseReleaseEvent(self, event):
 
@@ -560,17 +582,26 @@ class FlameSlider(QtWidgets.QLineEdit):
 
             # Open calculator if button is released within 10 pixels of button click
 
-            if event.pos().x() in range((self.pos_at_press.x() - 10), (self.pos_at_press.x() + 10)) and event.pos().y() in range((self.pos_at_press.y() - 10), (self.pos_at_press.y() + 10)):
+            if event.pos().x() in range(
+                    (self.pos_at_press.x() - 10),
+                    (self.pos_at_press.x() + 10)
+            ) and event.pos().y() in range(
+                    (self.pos_at_press.y() - 10),
+                    (self.pos_at_press.y() + 10)
+            ):
                 self.calculator()
             else:
-                self.setStyleSheet("""QLineEdit {color: rgb(154, 154, 154);
-                                                 background-color: rgb(55, 65, 75);
-                                                 selection-color: rgb(154, 154, 154);
-                                                 selection-background-color: rgb(55, 65, 75);
-                                                 border: none;
-                                                 padding-left: 5px;
-                                                 font: 14pt "Discreet"}
-                                   QLineEdit:hover {border: 1px solid rgb(90, 90, 90)}""")
+                self.setStyleSheet("""
+                    QLineEdit {
+                        color: rgb(154, 154, 154);
+                        background-color: rgb(55, 65, 75);
+                        selection-color: rgb(154, 154, 154);
+                        selection-background-color: rgb(55, 65, 75);
+                        border: none;
+                        padding-left: 5px;
+                        font: 14pt "Discreet"}
+                    QLineEdit:hover {
+                        border: 1px solid rgb(90, 90, 90)}""")
 
             self.value_at_press = None
             self.pos_at_press = None
