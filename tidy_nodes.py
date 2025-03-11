@@ -689,20 +689,17 @@ class TidyNodes(object):
     @staticmethod
     def message(string):
         """Print message to shell window and append global MESSAGE_PREFIX."""
-
         print(' '.join([MESSAGE_PREFIX, string]))
 
     def get_starting_positions(self):
         """Store a list of tuples, that contains the integer x, y postion for each node
         in self.selection."""
-
         for node in self.selection:
             self.starting_positions.append((node.pos_x.get_value(),
                                             node.pos_y.get_value()))
 
     def get_boundaries(self):
         """Store the maximum & minimum values for x, y of selected nodes."""
-
         sort_x = sorted(self.starting_positions, key=lambda x: x[0])
         sort_y = sorted(self.starting_positions, key=lambda y: y[1])
 
@@ -712,7 +709,6 @@ class TidyNodes(object):
     def get_center(self):
         """Store a tuple that contains the integer x, y center point for the selected
         nodes."""
-
         x_center = (self.boundaries['x_max'] + self.boundaries['x_min']) / 2
         y_center = (self.boundaries['y_max'] + self.boundaries['y_min']) / 2
 
@@ -720,7 +716,6 @@ class TidyNodes(object):
 
     def distribute(self, x_axis=True, y_axis=True):
         """Evenly distribute the nodes between the 2 boundary nodes."""
-
         spacing_x = int(abs(round(
                 (self.boundaries['x_max'] - self.boundaries['x_min']) /
                 (len(self.selection) - 1))))
@@ -747,7 +742,6 @@ class TidyNodes(object):
 
     def return_to_starting_positions(self):
         """Move the nodes back to their starting positions."""
-
         for node, start_pos in zip(self.selection, self.starting_positions):
             node.pos_x.set_value(start_pos[0])
             node.pos_y.set_value(start_pos[1])
@@ -755,7 +749,6 @@ class TidyNodes(object):
     def scale(self, scale_x, scale_y):
         """Scale the distance from the selected nodes based on the center point of the
         selection."""
-
         for node, start_pos in zip(self.selection, self.starting_positions):
             destination_x = int(round(
                     (start_pos[0] - self.center[0]) * scale_x + self.center[0]))
@@ -771,30 +764,25 @@ class TidyNodes(object):
 
         def okay_button():
             """Close window and process selected nodes."""
-
             self.window_scale.close()
             self.message('Done!')
 
         def cancel_button():
             """Cancel python hook and close UI."""
-
             self.window_scale.close()
             self.return_to_starting_positions()
             self.message('Cancelled!')
 
         def update_scale():
             """Get slider value and pass to scale algorithm."""
-
             self.scale(float(self.slider_scale.text()), float(self.slider_scale.text()))
 
         def update_scale_x():
             """Get slider value and pass to scale algorithm."""
-
             self.scale(float(self.slider_scale_x.text()), 1)
 
         def update_scale_y():
             """Get slider value and pass to scale algorithm."""
-
             self.scale(1, float(self.slider_scale_y.text()))
 
         self.window_scale = QtWidgets.QWidget()
@@ -866,7 +854,6 @@ class TidyNodes(object):
 
 def align_horizontal(selection):
     """Scaling to 0 on Y is the same as aligning on the horizontal."""
-
     nodes = TidyNodes(selection)
     nodes.scale(1, 0)
     nodes.message('Done!')
@@ -874,7 +861,6 @@ def align_horizontal(selection):
 
 def align_vertical(selection):
     """Scaling to 0 on X is the same as aligning on the vertical."""
-
     nodes = TidyNodes(selection)
     nodes.scale(0, 1)
     nodes.message('Done!')
@@ -882,7 +868,6 @@ def align_vertical(selection):
 
 def distribute(selection):
     """Evenly space the selected nodes on X & Y axis."""
-
     nodes = TidyNodes(selection)
     nodes.distribute()
     nodes.message('Done!')
@@ -890,7 +875,6 @@ def distribute(selection):
 
 def distribute_horizontal(selection):
     """Evenly space the selected nodes on the X axis."""
-
     nodes = TidyNodes(selection)
     nodes.distribute(y_axis=False)
     nodes.message('Done!')
@@ -898,7 +882,6 @@ def distribute_horizontal(selection):
 
 def distribute_vertical(selection):
     """Evenly space the selected nodes on the Y axis."""
-
     nodes = TidyNodes(selection)
     nodes.distribute(x_axis=False)
     nodes.message('Done!')
@@ -906,14 +889,12 @@ def distribute_vertical(selection):
 
 def scale(selection):
     """Launch the the GUI window to interactively scale the selection."""
-
     nodes = TidyNodes(selection)
     nodes.scale_window()
 
 
 def tidy_horizontal(selection):
     """Align horizontally & distribute horizontally."""
-
     nodes = TidyNodes(selection)
     nodes.scale(1, 0)
     nodes.distribute(y_axis=False)
@@ -922,7 +903,6 @@ def tidy_horizontal(selection):
 
 def tidy_vertical(selection):
     """Align vertically & distribute vertically."""
-
     nodes = TidyNodes(selection)
     nodes.scale(0, 1)
     nodes.distribute(x_axis=False)
@@ -931,7 +911,6 @@ def tidy_vertical(selection):
 
 def scope_nodes(selection):
     """Test for correct node object types, at least 2 or more.  Returns a bool."""
-
     for item in selection:
         if isinstance(item, (flame.PyCoNode, flame.PyNode)):
             if len(selection) > 1:  # 2 or more nodes
@@ -941,7 +920,6 @@ def scope_nodes(selection):
 
 def scope_more_nodes(selection):
     """Test for correct node object types, at least 3 or more.  Returns a bool."""
-
     for item in selection:
         if isinstance(item, (flame.PyCoNode, flame.PyNode)):
             if len(selection) > 2:  # 3 or more nodes
@@ -951,7 +929,6 @@ def scope_more_nodes(selection):
 
 def get_action_custom_ui_actions():
     """Python hook to add custom right click menu items inside Action."""
-
     return [{'name': 'Tidy Nodes...',
              'actions': [{'name': 'Align Horizontally',
                           'isVisible': scope_nodes,
@@ -986,7 +963,6 @@ def get_action_custom_ui_actions():
 
 def get_batch_custom_ui_actions():
     """Python hook to add custom right click menu items inside Batch."""
-
     return [{'name': 'Tidy Nodes...',
              'actions': [{'name': 'Align Horizontally',
                           'isVisible': scope_nodes,
