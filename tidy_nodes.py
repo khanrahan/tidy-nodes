@@ -1,14 +1,14 @@
-'''
+"""
 Script Name: Tidy Nodes
 Written By: Kieran Hanrahan
 
-Script Version: 1.0.1
-Flame Version: 2021.1
+Script Version: 2.0.0
+Flame Version: 2025
 
 URL: http://github.com/khanrahan/tidy-nodes
 
 Creation Date: 02.01.24
-Update Date: 02.05.24
+Update Date: 03.11.25
 
 Description:
 
@@ -22,27 +22,27 @@ Menus:
 To Install:
 
     For all users, copy this file to:
-    /opt/Autodesk/shared/python
+    /opt/Autodesk/shared/python/
 
-    For a specific user, copy this file to:
-    /opt/Autodesk/user/<user name>/python
-'''
+    For a specific user on Linux, copy this file to:
+    /home/<user_name>/flame/python/
 
-from __future__ import print_function
+    For a specific user on Mac, copy this file to:
+    /Users/<user_name>/Library/Preferences/Autodesk/flame/python/
+"""
+
 import flame
-from PySide2 import QtCore
-from PySide2 import QtGui
-from PySide2 import QtWidgets
+from PySide6 import QtCore, QtGui, QtWidgets
 
 TITLE = 'Tidy Nodes'
-VERSION_INFO = (1, 0, 1)
+VERSION_INFO = (2, 0, 0)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
-TITLE_VERSION = '{} v{}'.format(TITLE, VERSION)
+TITLE_VERSION = f'{TITLE} v{VERSION}'
 MESSAGE_PREFIX = '[PYTHON]'
 
 
 class FlameButton(QtWidgets.QPushButton):
-    '''
+    """
     Custom Qt Flame Button Widget v2.1
 
     button_name: button text [str]
@@ -55,11 +55,11 @@ class FlameButton(QtWidgets.QPushButton):
 
         button = FlameButton(
             'Button Name', do_something__when_pressed, button_color='blue')
-    '''
+    """
 
     def __init__(self, button_name, connect, button_color='normal', button_width=150,
                  button_max_width=150):
-        super(FlameButton, self).__init__()
+        super().__init__()
 
         self.setText(button_name)
         self.setMinimumSize(QtCore.QSize(button_width, 28))
@@ -67,7 +67,7 @@ class FlameButton(QtWidgets.QPushButton):
         self.setFocusPolicy(QtCore.Qt.NoFocus)
         self.clicked.connect(connect)
         if button_color == 'normal':
-            self.setStyleSheet('''
+            self.setStyleSheet("""
                 QPushButton {
                     color: rgb(154, 154, 154);
                     background-color: rgb(58, 58, 58);
@@ -86,10 +86,10 @@ class FlameButton(QtWidgets.QPushButton):
                 QToolTip {
                     color: rgb(170, 170, 170);
                     background-color: rgb(71, 71, 71);
-                    border: 10px solid rgb(71, 71, 71)}''')
+                    border: 10px solid rgb(71, 71, 71)}""")
 
         elif button_color == 'blue':
-            self.setStyleSheet('''
+            self.setStyleSheet("""
                 QPushButton {
                     color: rgb(190, 190, 190);
                     background-color: rgb(0, 110, 175);
@@ -107,11 +107,11 @@ class FlameButton(QtWidgets.QPushButton):
                 QToolTip {
                     color: rgb(170, 170, 170);
                     background-color: rgb(71, 71, 71);
-                    border: 10px solid rgb(71, 71, 71)}''')
+                    border: 10px solid rgb(71, 71, 71)}""")
 
 
 class FlameLabel(QtWidgets.QLabel):
-    '''
+    """
     Custom Qt Flame Label Widget v2.1
 
     label_name:  text displayed [str]
@@ -122,10 +122,10 @@ class FlameLabel(QtWidgets.QLabel):
     Usage:
 
         label = FlameLabel('Label Name', 'normal', 300)
-    '''
+    """
 
     def __init__(self, label_name, label_type='normal', label_width=150):
-        super(FlameLabel, self).__init__()
+        super().__init__()
 
         self.setText(label_name)
         self.setMinimumSize(label_width, 28)
@@ -135,34 +135,34 @@ class FlameLabel(QtWidgets.QLabel):
         # Set label stylesheet based on label_type
 
         if label_type == 'normal':
-            self.setStyleSheet('''
+            self.setStyleSheet("""
                 QLabel {
                     color: rgb(154, 154, 154);
                     font: 14px "Discreet"}
                 QLabel:disabled {
-                    color: rgb(106, 106, 106)}''')
+                    color: rgb(106, 106, 106)}""")
         elif label_type == 'underline':
             self.setAlignment(QtCore.Qt.AlignCenter)
-            self.setStyleSheet('''
+            self.setStyleSheet("""
                 QLabel {
                     color: rgb(154, 154, 154);
                     border-bottom: 1px inset rgb(40, 40, 40);
                     font: 14px "Discreet"}
                 QLabel:disabled {
-                    color: rgb(106, 106, 106)}''')
+                    color: rgb(106, 106, 106)}""")
         elif label_type == 'background':
-            self.setStyleSheet('''
+            self.setStyleSheet("""
                 QLabel {
                     color: rgb(154, 154, 154);
                     background-color: rgb(30, 30, 30);
                     padding-left: 5px;
                     font: 14px "Discreet"}
                 QLabel:disabled {
-                    color: rgb(106, 106, 106)}''')
+                    color: rgb(106, 106, 106)}""")
 
 
 class FlameSlider(QtWidgets.QLineEdit):
-    '''
+    """
     Custom Qt Flame Slider Widget v2.1
 
     start_value: int or float value
@@ -174,11 +174,14 @@ class FlameSlider(QtWidgets.QLineEdit):
     Usage:
 
         slider = FlameSlider(0, -20, 20, False)
-    '''
+    """
 
-    def __init__(self, start_value, min_value, max_value, value_is_float=False, slider_width=110):
+    def __init__(
+            self, start_value, min_value, max_value,
+            value_is_float=False, slider_width=110
+    ):
 
-        super(FlameSlider, self).__init__()
+        super().__init__()
         self.setAlignment(QtCore.Qt.AlignCenter)
         self.setMinimumHeight(28)
         self.setMinimumWidth(slider_width)
@@ -215,7 +218,7 @@ class FlameSlider(QtWidgets.QLineEdit):
         class Slider(QtWidgets.QSlider):
 
             def __init__(self, start_value, min_value, max_value, slider_width):
-                super(Slider, self).__init__()
+                super().__init__()
 
                 self.setMaximumHeight(4)
                 self.setMinimumWidth(slider_width)
@@ -255,7 +258,7 @@ class FlameSlider(QtWidgets.QLineEdit):
 
         def button_press(key):
 
-            if self.clean_line == True:
+            if self.clean_line:
                 calc_lineedit.setText('')
 
             calc_lineedit.insert(key)
@@ -293,7 +296,7 @@ class FlameSlider(QtWidgets.QLineEdit):
 
         def enter():
 
-            if self.clean_line == True:
+            if self.clean_line:
                 return calc_window.close()
 
             if calc_lineedit.text():
@@ -359,23 +362,30 @@ class FlameSlider(QtWidgets.QLineEdit):
 
         def close_calc():
             calc_window.close()
-            self.setStyleSheet("""QLineEdit {color: rgb(154, 154, 154);
-                                             background-color: rgb(55, 65, 75);
-                                             selection-color: rgb(154, 154, 154);
-                                             selection-background-color: rgb(55, 65, 75);
-                                             border: none;
-                                             padding-left: 5px;
-                                             font: 14pt "Discreet"}
-                               QLineEdit:hover {border: 1px solid rgb(90, 90, 90)}""")
+            self.setStyleSheet("""
+                QLineEdit {
+                    color: rgb(154, 154, 154);
+                    background-color: rgb(55, 65, 75);
+                    selection-color: rgb(154, 154, 154);
+                    selection-background-color: rgb(55, 65, 75);
+                    border: none;
+                    padding-left: 5px;
+                    font: 14pt "Discreet"}
+                QLineEdit:hover {
+                    border: 1px solid rgb(90, 90, 90)}""")
+
         def revert_color():
-            self.setStyleSheet("""QLineEdit {color: rgb(154, 154, 154);
-                                             background-color: rgb(55, 65, 75);
-                                             selection-color: rgb(154, 154, 154);
-                                             selection-background-color: rgb(55, 65, 75);
-                                             border: none;
-                                             padding-left: 5px;
-                                             font: 14pt "Discreet"}
-                               QLineEdit:hover {border: 1px solid rgb(90, 90, 90)}""")
+            self.setStyleSheet("""
+                QLineEdit {
+                    color: rgb(154, 154, 154);
+                    background-color: rgb(55, 65, 75);
+                    selection-color: rgb(154, 154, 154);
+                    selection-background-color: rgb(55, 65, 75);
+                    border: none;
+                    padding-left: 5px;
+                    font: 14pt "Discreet"}
+                QLineEdit:hover {
+                    border: 1px solid rgb(90, 90, 90)}""")
         calc_version = '1.2'
         self.clean_line = False
 
@@ -405,18 +415,20 @@ class FlameSlider(QtWidgets.QLineEdit):
         calc_lineedit.setMinimumHeight(28)
         calc_lineedit.setFocus()
         calc_lineedit.returnPressed.connect(enter)
-        calc_lineedit.setStyleSheet("""QLineEdit {color: rgb(154, 154, 154);
-                                                  background-color: rgb(55, 65, 75);
-                                                  selection-color: rgb(38, 38, 38);
-                                                  selection-background-color: rgb(184, 177, 167);
-                                                  border: none;
-                                                  padding-left: 5px;
-                                                  font: 14px "Discreet"}""")
+        calc_lineedit.setStyleSheet("""
+            QLineEdit {
+                color: rgb(154, 154, 154);
+                background-color: rgb(55, 65, 75);
+                selection-color: rgb(38, 38, 38);
+                selection-background-color: rgb(184, 177, 167);
+                border: none;
+                padding-left: 5px;
+                font: 14px "Discreet"}""")
 
         # Limit characters that can be entered into lineedit
 
-        regex = QtCore.QRegExp('[0-9_,=,/,*,+,\-,.]+')
-        validator = QtGui.QRegExpValidator(regex)
+        regex = QtCore.QRegularExpression('[0-9_,=,/,*,+,\-,.]+')
+        validator = QtGui.QRegularExpressionValidator(regex)
         calc_lineedit.setValidator(validator)
 
         # Buttons
@@ -426,12 +438,13 @@ class FlameSlider(QtWidgets.QLineEdit):
             pass
 
         class FlameButton(QtWidgets.QPushButton):
-            """
-            Custom Qt Flame Button Widget
-            """
+            """Custom Qt Flame Button Widget"""
 
-            def __init__(self, button_name, size_x, size_y, connect, parent, *args, **kwargs):
-                super(FlameButton, self).__init__(*args, **kwargs)
+            def __init__(
+                    self, button_name, size_x, size_y,
+                    connect, parent, *args, **kwargs
+            ):
+                super().__init__(*args, **kwargs)
 
                 self.setText(button_name)
                 self.setParent(parent)
@@ -439,17 +452,22 @@ class FlameSlider(QtWidgets.QLineEdit):
                 self.setMaximumSize(size_x, size_y)
                 self.setFocusPolicy(QtCore.Qt.NoFocus)
                 self.clicked.connect(connect)
-                self.setStyleSheet("""QPushButton {color: rgb(154, 154, 154);
-                                                 background-color: rgb(58, 58, 58);
-                                                 border: none;
-                                                 font: 14px "Discreet"}
-                                   QPushButton:hover {border: 1px solid rgb(90, 90, 90)}
-                                   QPushButton:pressed {color: rgb(159, 159, 159);
-                                                         background-color: rgb(66, 66, 66);
-                                                         border: none}
-                                   QPushButton:disabled {color: rgb(116, 116, 116);
-                                                          background-color: rgb(58, 58, 58);
-                                                          border: none}""")
+                self.setStyleSheet("""
+                    QPushButton {
+                        color: rgb(154, 154, 154);
+                        background-color: rgb(58, 58, 58);
+                        border: none;
+                        font: 14px "Discreet"}
+                    QPushButton:hover {
+                        border: 1px solid rgb(90, 90, 90)}
+                    QPushButton:pressed {
+                        color: rgb(159, 159, 159);
+                        background-color: rgb(66, 66, 66);
+                        border: none}
+                    QPushButton:disabled {
+                        color: rgb(116, 116, 116);
+                        background-color: rgb(58, 58, 58);
+                        border: none}""")
 
         blank_btn = FlameButton('', 40, 28, calc_null, calc_window)
         blank_btn.setDisabled(True)
@@ -549,14 +567,17 @@ class FlameSlider(QtWidgets.QLineEdit):
             self.value_at_press = self.value()
             self.pos_at_press = event.pos()
             self.setCursor(QtGui.QCursor(QtCore.Qt.SizeHorCursor))
-            self.setStyleSheet("""QLineEdit {color: rgb(217, 217, 217);
-                                             background-color: rgb(73, 86, 99);
-                                             selection-color: rgb(154, 154, 154);
-                                             selection-background-color: rgb(73, 86, 99);
-                                             border: none;
-                                             padding-left: 5px;
-                                             font: 14pt "Discreet"}
-                               QLineEdit:hover {border: 1px solid rgb(90, 90, 90)}""")
+            self.setStyleSheet("""
+                QLineEdit {
+                    color: rgb(217, 217, 217);
+                    background-color: rgb(73, 86, 99);
+                    selection-color: rgb(154, 154, 154);
+                    selection-background-color: rgb(73, 86, 99);
+                    border: none;
+                    padding-left: 5px;
+                    font: 14pt "Discreet"}
+                QLineEdit:hover {
+                    border: 1px solid rgb(90, 90, 90)}""")
 
     def mouseReleaseEvent(self, event):
 
@@ -564,24 +585,33 @@ class FlameSlider(QtWidgets.QLineEdit):
 
             # Open calculator if button is released within 10 pixels of button click
 
-            if event.pos().x() in range((self.pos_at_press.x() - 10), (self.pos_at_press.x() + 10)) and event.pos().y() in range((self.pos_at_press.y() - 10), (self.pos_at_press.y() + 10)):
+            if event.pos().x() in range(
+                    (self.pos_at_press.x() - 10),
+                    (self.pos_at_press.x() + 10)
+            ) and event.pos().y() in range(
+                    (self.pos_at_press.y() - 10),
+                    (self.pos_at_press.y() + 10)
+            ):
                 self.calculator()
             else:
-                self.setStyleSheet("""QLineEdit {color: rgb(154, 154, 154);
-                                                 background-color: rgb(55, 65, 75);
-                                                 selection-color: rgb(154, 154, 154);
-                                                 selection-background-color: rgb(55, 65, 75);
-                                                 border: none;
-                                                 padding-left: 5px;
-                                                 font: 14pt "Discreet"}
-                                   QLineEdit:hover {border: 1px solid rgb(90, 90, 90)}""")
+                self.setStyleSheet("""
+                    QLineEdit {
+                        color: rgb(154, 154, 154);
+                        background-color: rgb(55, 65, 75);
+                        selection-color: rgb(154, 154, 154);
+                        selection-background-color: rgb(55, 65, 75);
+                        border: none;
+                        padding-left: 5px;
+                        font: 14pt "Discreet"}
+                    QLineEdit:hover {
+                        border: 1px solid rgb(90, 90, 90)}""")
 
             self.value_at_press = None
             self.pos_at_press = None
             self.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
             return
 
-        super(FlameSlider, self).mouseReleaseEvent(event)
+        super().mouseReleaseEvent(event)
 
     def mouseMoveEvent(self, event):
         if event.buttons() != QtCore.Qt.LeftButton:
@@ -601,7 +631,7 @@ class FlameSlider(QtWidgets.QLineEdit):
         value = self.value_at_press + delta
         self.setValue(value)
 
-        super(FlameSlider, self).mouseMoveEvent(event)
+        super().mouseMoveEvent(event)
 
     def getStepsMultiplier(self, event):
 
@@ -652,13 +682,11 @@ class FlameSlider(QtWidgets.QLineEdit):
             self.setText('%.2f' % float(value))
 
 
-class TidyNodes(object):
-    '''
-    Tidy selected nodes in the Action or Batch schematic.
+class TidyNodes:
+    """Tidy selected nodes in the Action or Batch schematic.
 
-    Use to scale or evenly distribute nodes.
-
-    NOTE - Flame node position values are integer.  Beware floats!
+    Use to scale or evenly distribute nodes.  A tidy operation is combination of align &
+    distribute.  NOTE - Flame node position values are integer.  Beware floats!
 
     Attributes:
         selection (list):
@@ -669,14 +697,14 @@ class TidyNodes(object):
             Integer max and min values for x & y axis of selection node objects.
         center (tuple):
             Integer x, y center point of the selected node objects.
-    '''
+    """
 
     def __init__(self, selection):
-
+        """Initialize TidyNodes object with starting attributes."""
         self.selection = selection
 
         self.message(TITLE_VERSION)
-        self.message('Script called from {}'.format(__file__))
+        self.message(f'Script called from {__file__}')
 
         self.starting_positions = []
         self.get_starting_positions()
@@ -687,23 +715,26 @@ class TidyNodes(object):
         self.center = None
         self.get_center()
 
+        self.names = None
+        self.get_names()
+
     @staticmethod
     def message(string):
-        '''Print message to shell window and append global MESSAGE_PREFIX.'''
-
+        """Print message to shell window and append global MESSAGE_PREFIX."""
         print(' '.join([MESSAGE_PREFIX, string]))
 
     def get_starting_positions(self):
-        '''Store a list of tuples, that contains the integer x, y postion for each node
-        in self.selection.'''
+        """Get starting position of selected nodes.
 
+        Store a list of tuples, that contains the integer x, y postion for each node
+        in self.selection.
+        """
         for node in self.selection:
             self.starting_positions.append((node.pos_x.get_value(),
                                             node.pos_y.get_value()))
 
     def get_boundaries(self):
-        '''Store the maximum & minimum values for x, y of selected nodes.'''
-
+        """Store the maximum & minimum values for x, y of selected nodes."""
         sort_x = sorted(self.starting_positions, key=lambda x: x[0])
         sort_y = sorted(self.starting_positions, key=lambda y: y[1])
 
@@ -711,17 +742,30 @@ class TidyNodes(object):
                            'y_max': sort_y[0][1], 'y_min': sort_y[-1][1]}
 
     def get_center(self):
-        '''Store a tuple that contains the integer x, y center point for the selected
-        nodes.'''
+        """Get center point of selected nodes.
 
+        Store a tuple that contains the integer x, y center point for the selected
+        nodes.
+        """
         x_center = (self.boundaries['x_max'] + self.boundaries['x_min']) / 2
         y_center = (self.boundaries['y_max'] + self.boundaries['y_min']) / 2
 
         self.center = (x_center, y_center)
 
-    def distribute(self, x_axis=True, y_axis=True):
-        '''Evenly distribute the nodes between the 2 boundary nodes.'''
+    def get_names(self):
+        """Get a string of all selected node names.
 
+        If 2 or more join with oxford comma.
+        """
+        name_list = [node.name.get_value() for node in self.selection]
+
+        if len(self.selection) == 2:
+            self.names = f'{name_list[0]} and {name_list[1]}'
+        if len(self.selection) > 2:
+            self.names = f"{', '.join(name_list[:-1])}, and {name_list[-1]}"
+
+    def distribute(self, x_axis=True, y_axis=True):
+        """Evenly distribute the nodes between the 2 boundary nodes."""
         spacing_x = int(abs(round(
                 (self.boundaries['x_max'] - self.boundaries['x_min']) /
                 (len(self.selection) - 1))))
@@ -747,16 +791,17 @@ class TidyNodes(object):
                 nodes_sorted_y[index][0].pos_y.set_value(dest_y[index])
 
     def return_to_starting_positions(self):
-        '''Move the nodes back to their starting positions.'''
-
+        """Move the nodes back to their starting positions."""
         for node, start_pos in zip(self.selection, self.starting_positions):
             node.pos_x.set_value(start_pos[0])
             node.pos_y.set_value(start_pos[1])
 
     def scale(self, scale_x, scale_y):
-        '''Scale the distance from the selected nodes based on the center point of the
-        selection.'''
+        """Scale nodes.
 
+        Scale the distance from the selected nodes based on the center point of the
+        selection.
+        """
         for node, start_pos in zip(self.selection, self.starting_positions):
             destination_x = int(round(
                     (start_pos[0] - self.center[0]) * scale_x + self.center[0]))
@@ -768,34 +813,29 @@ class TidyNodes(object):
             node.pos_y.set_value(destination_y)
 
     def scale_window(self):
-        '''Window for scaling interactively.'''
+        """Window for scaling interactively."""
 
         def okay_button():
-            '''Close window and process selected nodes.'''
-
+            """Close window and process selected nodes."""
             self.window_scale.close()
             self.message('Done!')
 
         def cancel_button():
-            '''Cancel python hook and close UI.'''
-
+            """Cancel python hook and close UI."""
             self.window_scale.close()
             self.return_to_starting_positions()
             self.message('Cancelled!')
 
         def update_scale():
-            '''Get slider value and pass to scale algorithm.'''
-
+            """Get slider value and pass to scale algorithm."""
             self.scale(float(self.slider_scale.text()), float(self.slider_scale.text()))
 
         def update_scale_x():
-            '''Get slider value and pass to scale algorithm.'''
-
+            """Get slider value and pass to scale algorithm."""
             self.scale(float(self.slider_scale_x.text()), 1)
 
         def update_scale_y():
-            '''Get slider value and pass to scale algorithm.'''
-
+            """Get slider value and pass to scale algorithm."""
             self.scale(1, float(self.slider_scale_y.text()))
 
         self.window_scale = QtWidgets.QWidget()
@@ -847,7 +887,7 @@ class TidyNodes(object):
         self.hbox.addWidget(self.ok_btn)
 
         self.vbox = QtWidgets.QVBoxLayout()
-        self.vbox.setMargin(20)
+        self.vbox.setContentsMargins(20, 20, 20, 20)
         self.vbox.addLayout(self.grid)
         self.vbox.insertSpacing(1, 20)
         self.vbox.addLayout(self.hbox)
@@ -855,103 +895,105 @@ class TidyNodes(object):
         self.window_scale.setLayout(self.vbox)
 
         # Center Window
-        resolution = QtWidgets.QDesktopWidget().screenGeometry()
+        resolution = QtGui.QGuiApplication.primaryScreen().availableGeometry()
         self.window_scale.move(
                 (resolution.width() / 2) - (self.window_scale.frameSize().width() / 2),
-                (resolution.height() / 2) - (self.window_scale.frameSize().height() / 2))
+                (resolution.height() / 2) - (self.window_scale.frameSize().height() / 2)
+        )
 
         self.window_scale.show()
         return self.window_scale
 
 
 def align_horizontal(selection):
-    '''Scaling to 0 on Y is the same as aligning on the horizontal.'''
-
+    """Scaling to 0 on Y is the same as aligning on the horizontal."""
     nodes = TidyNodes(selection)
     nodes.scale(1, 0)
+    nodes.message(f'Aligning the nodes {nodes.names} horizontally...')
     nodes.message('Done!')
 
 
 def align_vertical(selection):
-    '''Scaling to 0 on X is the same as aligning on the vertical.'''
-
+    """Scaling to 0 on X is the same as aligning on the vertical."""
     nodes = TidyNodes(selection)
     nodes.scale(0, 1)
+    nodes.message(f'Aligning the nodes {nodes.names} vertically...')
     nodes.message('Done!')
 
 
 def distribute(selection):
-    '''Evenly space the selected nodes on X & Y axis.'''
-
+    """Evenly space the selected nodes on X & Y axis."""
     nodes = TidyNodes(selection)
     nodes.distribute()
+    nodes.message(f'Distributing the nodes {nodes.names} horizontally & vertically...')
     nodes.message('Done!')
 
 
 def distribute_horizontal(selection):
-    '''Evenly space the selected nodes on the X axis.'''
-
+    """Evenly space the selected nodes on the X axis."""
     nodes = TidyNodes(selection)
     nodes.distribute(y_axis=False)
+    nodes.message(f'Distributing the nodes {nodes.names} horizontally...')
     nodes.message('Done!')
 
 
 def distribute_vertical(selection):
-    '''Evenly space the selected nodes on the Y axis.'''
-
+    """Evenly space the selected nodes on the Y axis."""
     nodes = TidyNodes(selection)
     nodes.distribute(x_axis=False)
+    nodes.message(f'Distributing the nodes {nodes.names} vertically...')
     nodes.message('Done!')
 
 
 def scale(selection):
-    '''Launch the the GUI window to interactively scale the selection.'''
-
+    """Launch the the GUI window to interactively scale the selection."""
     nodes = TidyNodes(selection)
+    nodes.message(f'Scaling the nodes {nodes.names}...')
     nodes.scale_window()
 
 
 def tidy_horizontal(selection):
-    '''Align horizontally & distribute horizontally.'''
-
+    """Align horizontally & distribute horizontally."""
     nodes = TidyNodes(selection)
     nodes.scale(1, 0)
     nodes.distribute(y_axis=False)
+    nodes.message(f'Tidying the nodes {nodes.names} horizontally...')
     nodes.message('Done!')
 
 
 def tidy_vertical(selection):
-    '''Align vertically & distribute vertically.'''
-
+    """Align vertically & distribute vertically."""
     nodes = TidyNodes(selection)
     nodes.scale(0, 1)
     nodes.distribute(x_axis=False)
+    nodes.message(f'Tidying the nodes {nodes.names} vertically...')
     nodes.message('Done!')
 
 
 def scope_nodes(selection):
-    '''Test for correct node object types, at least 2 or more.  Returns a bool.'''
+    """Test for correct node object types, at least 2 or more.  Returns a bool."""
+    valid_objects = (
+            flame.PyCoNode,
+            flame.PyNode,
+    )
 
-    for item in selection:
-        if isinstance(item, (flame.PyCoNode, flame.PyNode)):
-            if len(selection) > 1:  # 2 or more nodes
-                return True
-    return False
+    if all(isinstance(item, valid_objects) for item in selection):
+        return len(selection) > 1
 
 
 def scope_more_nodes(selection):
-    '''Test for correct node object types, at least 3 or more.  Returns a bool.'''
+    """Test for correct node object types, at least 3 or more.  Returns a bool."""
+    valid_objects = (
+            flame.PyCoNode,
+            flame.PyNode,
+    )
 
-    for item in selection:
-        if isinstance(item, (flame.PyCoNode, flame.PyNode)):
-            if len(selection) > 2:  # 3 or more nodes
-                return True
-    return False
+    if all(isinstance(item, valid_objects) for item in selection):
+        return len(selection) > 2
 
 
 def get_action_custom_ui_actions():
-    '''Python hook to add custom right click menu items inside Action.'''
-
+    """Python hook to add custom right click menu items inside Action."""
     return [{'name': 'Tidy Nodes...',
              'actions': [{'name': 'Align Horizontally',
                           'isVisible': scope_nodes,
@@ -974,46 +1016,45 @@ def get_action_custom_ui_actions():
                           'execute': scale,
                           'minimumVersion': '2021.1'},
                          {'name': 'Tidy Horizontally',
-                          'isVisible': scope_nodes,
+                          'isVisible': scope_more_nodes,
                           'execute': tidy_horizontal,
                           'minimemVersion': '2021.1'},
                          {'name': 'Tidy Vertically',
-                          'isVisible': scope_nodes,
+                          'isVisible': scope_more_nodes,
                           'execute': tidy_vertical,
                           'minimemVersion': '2021.1'}]
             }]
 
 
 def get_batch_custom_ui_actions():
-    '''Python hook to add custom right click menu items inside Batch.'''
-
+    """Python hook to add custom right click menu items inside Batch."""
     return [{'name': 'Tidy Nodes...',
              'actions': [{'name': 'Align Horizontally',
                           'isVisible': scope_nodes,
                           'execute': align_horizontal,
-                          'minimumVersion': '2021.1'},
+                          'minimumVersion': '2025.0.0.0'},
                          {'name': 'Align Vertically',
                           'isVisible': scope_nodes,
                           'execute': align_vertical,
-                          'minimumVersion': '2021.1'},
+                          'minimumVersion': '2025.0.0.0'},
                          {'name': 'Distribute Horizontally',
                           'isVisible': scope_more_nodes,
                           'execute': distribute_horizontal,
-                          'minimumVersion': '2021.1'},
+                          'minimumVersion': '2025.0.0.0'},
                          {'name': 'Distribute Vertically',
                           'isVisible': scope_more_nodes,
                           'execute': distribute_vertical,
-                          'minimemVersion': '2021.1'},
+                          'minimemVersion': '2025.0.0.0'},
                          {'name': 'Scale',
                           'isVisible': scope_nodes,
                           'execute': scale,
-                          'minimumVersion': '2021.1'},
+                          'minimumVersion': '2025.0.0.0'},
                          {'name': 'Tidy Horizontally',
-                          'isVisible': scope_nodes,
+                          'isVisible': scope_more_nodes,
                           'execute': tidy_horizontal,
-                          'minimemVersion': '2021.1'},
+                          'minimemVersion': '2025.0.0.0'},
                          {'name': 'Tidy Vertically',
-                          'isVisible': scope_nodes,
+                          'isVisible': scope_more_nodes,
                           'execute': tidy_vertical,
-                          'minimemVersion': '2021.1'}]
+                          'minimemVersion': '2025.0.0.0'}]
             }]

@@ -2,16 +2,31 @@
 
 Plugin for [Autodesk Flame software](http://www.autodesk.com/products/flame).
 
-Align, distribute, or both (aka tidy) nodes in the Batch or Action schematic.
+Align, distribute, tidy (align & distribute), or scale nodes in the Batch or Action schematic.
 
 ![screen capture demonstration](tidy_nodes_demo.gif)
 
+## Compatibility
+|Release Version|Flame Version|
+|---|---|
+|v2.X.X|Flame 2025 and up|
+|v1.X.X|Flame 2021 up to 2024.2|
+
 ## Installation
-**Tested & working on 2021.1 & 2024.1.2**
 
-To make available to all users on the workstation, copy `align_nodes.py` to `/opt/Autodesk/shared/python`
+### Flame 2025 and newer
+To make available to all users on the workstation, copy `tidy_nodes.py` to `/opt/Autodesk/shared/python/`
 
-For specific users, copy to `/opt/Autodesk/user/<user name>/python`
+For specific users, copy `tidy_nodes.py` to the appropriate path below...
+|Platform|Path|
+|---|---|
+|Linux|`/home/<user_name>/flame/python/`|
+|Mac|`/Users/<user_name>/Library/Preferences/Autodesk/flame/python/`|
+
+### Flame 2021 up to 2024.2
+To make available to all users on the workstation, copy `tidy_nodes.py` to `/opt/Autodesk/shared/python/`
+
+For specific users, copy `tidy_nodes.py` to `/opt/Autodesk/user/<user name>/python/`
 
 ## Menus
 - Right-click selected nodes in the Action schematic `->` Tidy Nodes... `->`
