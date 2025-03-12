@@ -832,11 +832,17 @@ class TidyNodes:
 
         def update_scale_x():
             """Get slider value and pass to scale algorithm."""
-            self.scale(float(self.slider_scale_x.text()), 1)
+            self.scale(
+                    float(self.slider_scale_x.text()),
+                    float(self.slider_scale_y.text())
+            )
 
         def update_scale_y():
             """Get slider value and pass to scale algorithm."""
-            self.scale(1, float(self.slider_scale_y.text()))
+            self.scale(
+                    float(self.slider_scale_x.text()),
+                    float(self.slider_scale_y.text())
+            )
 
         self.window_scale = QtWidgets.QWidget()
 
