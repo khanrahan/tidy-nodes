@@ -2,7 +2,7 @@
 Script Name: Tidy Nodes
 Written By: Kieran Hanrahan
 
-Script Version: 2.0.0
+Script Version: 2.0.1
 Flame Version: 2025
 
 URL: http://github.com/khanrahan/tidy-nodes
@@ -35,7 +35,7 @@ import flame
 from PySide6 import QtCore, QtGui, QtWidgets
 
 TITLE = 'Tidy Nodes'
-VERSION_INFO = (2, 0, 0)
+VERSION_INFO = (2, 0, 1)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
 TITLE_VERSION = f'{TITLE} v{VERSION}'
 MESSAGE_PREFIX = '[PYTHON]'
@@ -832,11 +832,17 @@ class TidyNodes:
 
         def update_scale_x():
             """Get slider value and pass to scale algorithm."""
-            self.scale(float(self.slider_scale_x.text()), 1)
+            self.scale(
+                    float(self.slider_scale_x.text()),
+                    float(self.slider_scale_y.text())
+            )
 
         def update_scale_y():
             """Get slider value and pass to scale algorithm."""
-            self.scale(1, float(self.slider_scale_y.text()))
+            self.scale(
+                    float(self.slider_scale_x.text()),
+                    float(self.slider_scale_y.text())
+            )
 
         self.window_scale = QtWidgets.QWidget()
 
